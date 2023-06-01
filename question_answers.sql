@@ -10,6 +10,7 @@ WHERE gp >= 15
 ORDER BY gaa DESC
 LIMIT 5;
 
+
 -- 2. Which goalkeeper has the highest Save Percentage (sv_pct) for each year?
 
 SELECT gk1.player,
@@ -55,6 +56,7 @@ ON p1.year = p2.year AND p1.g = p2.max_g
 GROUP BY p1.player, p1.gp, p2.year, p2.max_g -- this gets rid of duplicates
 ORDER BY year;
 
+
 -- 4. What are the top 10 players with the highest Shot Conversion Rate (sc_pct) of all time?
 
 SELECT year,
@@ -66,18 +68,87 @@ GROUP BY year, player
 ORDER BY max_sc_pct DESC
 LIMIT 10;
 
--- 5. What teams qualified for the playoffs in the Eastern Conference in the year 1996?
 
--- 6. Which team had the highest number of Points (pts) ever in the Western Conference?
+-- 5. What are the teams that qualified for the playoffs in the Eastern Conference in the year 1999?
 
--- 7. Who is the player with the highest Overall Rating (ovr)?
+SELECT team 
+FROM conference_games
+WHERE conference ILIKE 'Eastern Conference' AND year = 1999;
+
+
+-- 6. Which team had the highest number of Points (pts) in the Western Conference in the year 2005?
+
+SELECT team 
+FROM conference_games
+WHERE conference ILIKE 'Western Conference' AND year = 2005
+ORDER BY pts DESC
+LIMIT 1;
+
 
 -- 8. Which position has the highest average Physical (phy) rating?
 
--- 9. Which players were part of the teams that qualified for the playoffs in the year 2016?
+SELECT pos, ROUND(AVG(phy), 2) AS avg_phy
+FROM player_ratings
+GROUP BY pos
+ORDER BY avg_phy DESC
+LIMIT 1;
 
--- 10. Who are the top-rated players in terms of Overall Rating (ovr)?
+-- 9. Which players were part of the teams that qualified for the playoffs in the year 2004? 	  
+	  
+-- conference_games table has the team the full names of the team, but
+-- all_players and all_goalkeepers tables have the team names abbreviated
 
--- 11. Which goalkeepers played for teams that had a positive Goal Difference (gd) in the year 1999? 
+-- teams that qualified for the playoffs in 2004
 
--- 12. Who are the players with the highest Overall Rating (ovr) among the teams that qualified for the playoffs in the year 1996? 
+SELECT team
+FROM conference_games
+WHERE year = 2004 AND qualification ILIKE 'playoffs';
+	  
+-- the qualifying teams and their abbreviations
+
+-- "Columbus Crew" - CLB
+-- "D.C. United" - DC
+-- "MetroStars" - MET
+-- "New England Revolution" - NE
+-- "Kansas City Wizards" - KC
+-- "Los Angeles Galaxy" - LA
+-- "Colorado Rapids" - COL
+-- "San Jose Earthquakes" - SJ
+	  
+SELECT ap.player, ap.club, ap.year
+FROM all_players AS ap
+INNER JOIN 
+
+		  (SELECT REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
+					team, 'Columbus Crew', 'CLB'),
+		  			'D.C. United', 'DC'),
+		  			'MetroStars', 'MET'),
+		  			'New England Revolution', 'NE'),
+		  			'Kansas City Wizards', 'KC'),
+		  			'Los Angeles Galaxy', 'LA'),
+		  			'Colorado Rapids', 'COL'),
+		  			'San Jose Earthquakes', 'SJ') AS team
+			FROM conference_games
+			WHERE year = 2004 AND qualification ILIKE 'playoffs') AS cg
+				  
+ON ap.club = cg.team
+WHERE ap.year = 2004
+ORDER BY ap.club;
+	  
+
+-- 10. Who are the top-rated players in terms of Overall Rating (ovr) for each position?
+
+SELECT pr1.pos, pr1.player, pr2.max_ovr AS ovr
+FROM player_ratings AS pr1
+INNER JOIN 
+
+		   (SELECT pos, MAX(ovr) AS max_ovr
+			FROM player_ratings
+			GROUP BY pos) AS pr2
+			
+ON pr1.pos = pr2.pos AND pr1.ovr = pr2.max_ovr
+ORDER BY pos
+
+
+-- 11. Which goalkeepers played for teams that had a positive Goal Difference (gd) in the year 1998? 
+

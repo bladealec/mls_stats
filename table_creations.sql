@@ -53,8 +53,8 @@ CREATE TABLE all_players (
   Season VARCHAR(10)
 );
 
--- Creating the all_tables table
-CREATE TABLE all_tables (
+-- Creating the conference_games table
+CREATE TABLE conference_games (
   Pos FLOAT,
   Team VARCHAR(100),
   GP INT,
@@ -64,13 +64,13 @@ CREATE TABLE all_tables (
   GF INT,
   GA INT,
   GD VARCHAR(10),
-  Pts INT,
+  Pts VARCHAR(100),
   Qualification VARCHAR(100),
   Conference VARCHAR(100),
   Year INT,
-  SL VARCHAR(10),
-  D VARCHAR(10),
-  Head_to_head VARCHAR(10),
+  SL VARCHAR(100),
+  D VARCHAR(100),
+  Head_to_head VARCHAR(100),
   PPG FLOAT
 );
 
