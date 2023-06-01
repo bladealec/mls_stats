@@ -151,4 +151,3 @@ ORDER BY pos
 
 
 -- 11. Which goalkeepers played for teams that had a positive Goal Difference (gd) in the year 1998? 
-
