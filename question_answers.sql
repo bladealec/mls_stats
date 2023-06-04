@@ -85,7 +85,7 @@ ORDER BY pts DESC
 LIMIT 1;
 
 
--- 8. Which position has the highest average Physical (phy) rating?
+-- 7. Which position has the highest average Physical (phy) rating?
 
 SELECT pos, ROUND(AVG(phy), 2) AS avg_phy
 FROM player_ratings
@@ -93,7 +93,7 @@ GROUP BY pos
 ORDER BY avg_phy DESC
 LIMIT 1;
 
--- 9. Which players were part of the teams that qualified for the playoffs in the year 2004? 	  
+-- 8. Which players were part of the teams that qualified for the playoffs in the year 2004? 	  
 	  
 -- conference_games table has the team the full names of the team, but
 -- all_players and all_goalkeepers tables have the team names abbreviated
@@ -136,7 +136,7 @@ WHERE ap.year = 2004
 ORDER BY ap.club;
 	  
 
--- 10. Who are the top-rated players in terms of Overall Rating (ovr) for each position?
+-- 9. Who are the top-rated players in terms of Overall Rating (ovr) for each position?
 
 SELECT pr1.pos, pr1.player, pr2.max_ovr AS ovr
 FROM player_ratings AS pr1
@@ -147,7 +147,12 @@ INNER JOIN
 			GROUP BY pos) AS pr2
 			
 ON pr1.pos = pr2.pos AND pr1.ovr = pr2.max_ovr
-ORDER BY pos
+ORDER BY pos;
 
 
--- 11. Which goalkeepers played for teams that had a positive Goal Difference (gd) in the year 1998? 
+-- 10. Which team(s) that had a negative Goal Difference (gd) in the year 2002?
+
+SELECT team, gd
+FROM conference_games
+WHERE CAST(REGEXP_REPLACE(gd, '[^0-9-]', '', 'g') AS INTEGER) < 0
+	  AND year = 2002;
