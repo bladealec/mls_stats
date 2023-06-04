@@ -1,6 +1,6 @@
 # MLS SQL Exercise (still in production; not finished)
 
-This repository contains an SQL exercise based on Major League Soccer (MLS) data. The exercise involves answering various questions about the MLS data using PostgreSQL and pgAdmin. You will also find a data dictionary and an entity-relationship diagram (ERD) to provide an understanding of the database structure.
+This repository contains an SQL exercise based on Major League Soccer (MLS) data. The exercise involves answering various questions about the MLS data using PostgreSQL and pgAdmin..
 
 ## Instructions
 
@@ -25,13 +25,8 @@ This repository contains an SQL exercise based on Major League Soccer (MLS) data
    7. Which position has the highest average Physical (phy) rating?
    8. Which players were part of the teams that qualified for the playoffs in the year 2004?
    9. Who are the top-rated players in terms of Overall Rating (ovr) for each position?
-   10. Which goalkeepers played for teams that had a positive Goal Difference (gd) in the year 1998?
+   10. Which team(s) that had a negative Goal Difference (gd) in the year 2002?
 
-5. Write SQL queries to answer the above questions and document your answers in the provided `answers.sql` file.
-
-6. Feel free to add any additional queries or analysis you find interesting.
-
-7. Once you have completed the exercise, commit and push your changes to the repository.
 
 ## Data Dictionary
 
@@ -124,14 +119,6 @@ G`: Home goals
    - `DRI`: Dribbling rating
    - `DEF`: Defending rating
    - `PHY`: Physical rating
-
-## Entity-Relationship Diagram (ERD)
-
-The ERD illustrates the relationships between the tables in the MLS database and helps visualize the structure of the data.
-
-![MLS ERD](erd.png)
-
-The ERD shows the four main tables (`all_goalkeepers`, `all_players`, `conference_games`, `player_ratings`) and their relationships. The tables are connected through common attributes, such as player names, club names, and year. Understanding the relationships between the tables is essential for performing queries and extracting meaningful insights from the data.
 
 ---
 
