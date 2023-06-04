@@ -1,6 +1,6 @@
 # MLS SQL Exercise (still in production; not finished)
 
-This repository contains an SQL exercise based on Major League Soccer (MLS) data. The exercise involves answering various questions about the MLS data using PostgreSQL and pgAdmin..
+This repository contains an SQL exercise based on Major League Soccer (MLS) data. The exercise involves answering various questions about the MLS data using PostgreSQL and pgAdmin. It is important to note that the data has not been cleaned to add an additional layer of complexity.
 
 ## Instructions
 
